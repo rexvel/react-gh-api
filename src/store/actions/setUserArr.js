@@ -20,13 +20,15 @@ export const setUserArrError = (error) => ({
   },
 });
 
-const getUser = () => (dispatch) => {
-  fetch('https://api.github.com/users?/since=100&per_page=100')
-    .then((response) => response.json())
-    .then((users) => {
-      console.log(users);
-      dispatch(setUserArrSuccess(users));
-    });
-};
+ const getUser = () => {
+   return (dispatch)=> {
+     fetch('https://api.github.com/users?/since=100&per_page=100')
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        dispatch(setUserArrSuccess(response))
+      });
+  }
+
 
 export default getUser;
