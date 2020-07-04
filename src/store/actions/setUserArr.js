@@ -30,5 +30,5 @@ export const setUserArrError = (error) => ({
       });
   }
 
-
+ }
 export default getUser;
