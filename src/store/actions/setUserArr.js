@@ -17,18 +17,21 @@ export const setUserArrError = (error) => ({
   type: SET_USERS_ERROR,
   payload: {
     error,
-  },
+  }
 });
 
- const getUser = () => {
-   return (dispatch)=> {
-     fetch('https://api.github.com/users?/since=100&per_page=100')
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        dispatch(setUserArrSuccess(response))
-      });
+ const getUser = () => async  (dispatch)=> {
+   dispatch(fetchUsersStarted())
+   try{
+     const response = await fetch('https://api.github.com/users?/since=10000&per_page=1000')
+     const data =  await response.json()
+        dispatch(setUserArrSuccess(data))
+      }
+    catch(err) {
+      console.error(err);
+       dispatch(setUserArrError())
+    }
   }
+  
 
- }
 export default getUser;

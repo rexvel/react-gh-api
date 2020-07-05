@@ -1,11 +1,13 @@
 import { connect } from "react-redux";
 // import { bindActionCreators } from 'redux';
-import App from "../App";
+import App from "../components/App";
 import getUser from '../../store/actions/setUserArr';
 
 const mapStateToProps = ({ users }) => ({
   users,
 });
+
+
 
 // eslint-disable-next-line arrow-parens
 // getUser - thunk

@@ -1,8 +1,20 @@
-export default (state = {}, action) => {
+import { SET_USERS_SUCCESS, SET_USERS_ERROR } from "../actions/types";
+
+const initState = {
+  
+  error: null,
+};
+
+export default (state = initState, action) => {
   switch (action.type) {
-    case 'SET_USERS':
+    case SET_USERS_SUCCESS:
       return {
-        ...action.users,
+         ...action.payload.users,
+      };
+    case SET_USERS_ERROR:
+      return {
+        ...state,
+        error: action.payload.users,
       };
 
     default:
