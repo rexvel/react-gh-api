@@ -16,7 +16,10 @@ const useStyles = makeStyles({
   },
   cardBody: {
     width: 170,
-    
+  },
+  userDetailLink: {
+    justifyContent:'center',
+    textDecoration:'none',
   }
 
 });
@@ -27,28 +30,28 @@ const TestComponent = (props) => {
   const {url} = user
   const preventDefault = (event) => event.preventDefault();
 
-  // console.log(user.login);
   return (
     <Card  spacing={2}>
-      <CardActionArea className={classes.cardBody}>
+       <a href={user.html_url}  target="_blank">
+        <CardActionArea className={classes.cardBody}>
         <CardMedia className={classes.avatar}
           component="img"
           alt="Contemplative Reptile"
           height="100"
           width="100"
-          minWidth="100"
-          maxWidth='100'
           image={user.avatar_url}
           title="Contemplative Reptile"
         />
+      </CardActionArea >
+
+      </a>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {user.login}
           </Typography>
         </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Typography className={classes.root}></Typography>
+     
+      <CardActions className={classes.userDetailLink}>
         <Link 
           to={{
             pathname: "/user",
@@ -59,6 +62,11 @@ const TestComponent = (props) => {
         >
           More info
         </Link>
+      </CardActions>
+      <CardActions className={classes.userDetailLink}>
+          <a href={user.html_url}  target="_blank">
+            Github profile
+          </a>
       </CardActions>
     </Card>
   );

@@ -28,7 +28,6 @@ class App extends React.Component {
       spacing : 2,
       
     };
-    // setUserArr
     this.myRef = React.createRef();
   }
 
@@ -49,7 +48,6 @@ class App extends React.Component {
   renderMain() {
     const { users, classes } = this.props;
     let list = [];
-    let wrappedList = [];
 
     if (!_.isEmpty(users)) {
       for (const user in users) {
@@ -67,16 +65,7 @@ class App extends React.Component {
     console.log(list);
 
     return (
-      <div className="App">
-        <form action="" onSubmit={(e) => this.handleSubmit(e)}>
-          <input
-            type="text"
-            ref={(element) => {
-              this.input = element;
-            }}
-            placeholder="user"
-          />
-        </form>
+      <div className="App" style={{padding:'70px'}}>
         {/* <TestComponent user={list[0]} /> */}
 
         <Grid container className={classes.root} >
@@ -84,11 +73,11 @@ class App extends React.Component {
             <Grid container justify="center" spacing={this.state.spacing}>
               {list.map((object) => {
                 return (
-                  <Grid key={object} item>
+                  <Grid key={_.uniqueId(object)} item>
                     <TestComponent user={object} />
                   </Grid>
                 );
-              })}{" "}
+              })}
             </Grid>
           </Grid>
         </Grid>
