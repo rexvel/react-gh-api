@@ -1,89 +1,86 @@
-import React from "react";
-import { MemoryRouter as Router } from 'react-router';
-import _ from "lodash";
-import Grid from "@material-ui/core/Grid";
-import { withStyles } from "@material-ui/core/styles";
-import getUser from "../../store/actions/setUserArr";
-import "./App.css";
-import TestComponent from "../TestComponent";
+import React from 'react';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+import getUser from '../../store/actions/setUserArr';
+import './App.css';
+import TestComponent from '../TestComponent';
 
 const useStyles = theme => ({
-  root: {
-    flexGrow: 1
-  },
-  paper: {
-    height: 140,
-    width: 100
-  },
-  control: {
-    padding: theme.spacing(2)
-  }
+    root: {
+        flexGrow: 1,
+    },
+    paper: {
+        height: 140,
+        width: 100,
+    },
+    control: {
+        padding: theme.spacing(2),
+    },
 });
 
 class App extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      username: "",
-      spacing : 2,
-      
+    state = {
+        spacing: 2,
     };
-    this.myRef = React.createRef();
-  }
 
-  componentDidMount() {
-    getUser();
-  }
+    myRef = React.createRef();
 
-  render() {
-    const { users } = this.props;
-    if (users[0] == undefined) return this.renderLoading();
-    return this.renderMain();
-  }
+    static propTypes = {
+        users: PropTypes.shape.isRequired,
+        classes: PropTypes.objectOf({
+            root: PropTypes.objectOf({
+                flexGrow: PropTypes.number.isRequired,
+            }),
+        }).isRequired,
+    };
 
-  renderLoading() {
-    return <p>Loading...</p>;
-  }
-
-  renderMain() {
-    const { users, classes } = this.props;
-    let list = [];
-
-    if (!_.isEmpty(users)) {
-      for (const user in users) {
-        let ghUser = users[user];
-        console.log(ghUser);
-        list.push(ghUser);
-      }
+    componentDidMount() {
+        getUser();
     }
 
-    list.map((object) => {
-      console.log({ ...object });
-    });
+    renderLoading = () => <p>Loading...</p>;
 
-    console.log(users);
-    console.log(list);
+    renderMain() {
+        const { spacing } = this.state;
+        const { users, classes } = this.props;
+        const { root } = classes;
+        const list = [];
 
-    return (
-      <div className="App" style={{padding:'70px'}}>
-        {/* <TestComponent user={list[0]} /> */}
+        if (!_.isEmpty(users)) {
+            for (const user in users) {
+                const ghUser = users[user];
 
-        <Grid container className={classes.root} >
-          <Grid item xs={12}>
-            <Grid container justify="center" spacing={this.state.spacing}>
-              {list.map((object) => {
-                return (
-                  <Grid key={_.uniqueId(object)} item>
-                    <TestComponent user={object} />
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Grid>
-        </Grid>
-      </div>
-    );
-  }
+                console.log(ghUser);
+                list.push(ghUser);
+            }
+        }
+
+        return (
+            <div className="App" style={{ padding: '70px' }}>
+                <Grid container className={root}>
+                    <Grid item xs={12}>
+                        <Grid container justify="center" spacing={spacing}>
+                            {list.map(object => {
+                                return (
+                                    <Grid key={_.uniqueId(object)} item>
+                                        <TestComponent user={object} />
+                                    </Grid>
+                                );
+                            })}
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </div>
+        );
+    }
+
+    render() {
+        const { users } = this.props;
+
+        return users[0] === undefined ? this.renderLoading() : this.renderMain();
+    }
 }
 
-export default withStyles(useStyles)(App)
+export default withStyles(useStyles)(App);

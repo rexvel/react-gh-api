@@ -8,17 +8,17 @@ import store from './store/index';
 import AppRoot from './view/components/AppRoot';
 import * as serviceWorker from './serviceWorker';
 
+// eslint-disable-next-line import/prefer-default-export
 export const history = createBrowserHistory();
 
-
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
-    <AppRoot />
-    </Router>
-  </Provider>,
+    <Provider store={store}>
+        <Router history={history}>
+            <AppRoot />
+        </Router>
+    </Provider>,
 
-  document.getElementById('root'),
+    document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change
