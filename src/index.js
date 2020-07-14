@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history';
 import './index.css';
 import { Provider } from 'react-redux';
 import store from './store/index';
-import AppRoot from './view/components/AppRoot';
+import AppRoot from './view/components/AppRoot/AppRoot';
 import * as serviceWorker from './serviceWorker';
 
 // eslint-disable-next-line import/prefer-default-export

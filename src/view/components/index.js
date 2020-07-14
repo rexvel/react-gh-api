@@ -1,4 +1,4 @@
-import App from './App';
-import UserComponent from './UserComponent';
+import App from './App/App';
+import UserComponent from './UserComponent/UserComponent';
 
 export { App, UserComponent };

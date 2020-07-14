@@ -3,15 +3,15 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import routePaths from './routePaths';
 import App from '../view/containers/App';
-import UserComponent from '../view/components/UserComponent'
+import UserComponent from '../view/containers/UserComponent';
 
 const Routes = () => (
-  <>
-    <Switch>
-    <Route exact path={routePaths.homePage()} component={App} />
-      <Route path={routePaths.userComponent()} component={UserComponent} />
-    </Switch>
-  </>
+    <>
+        <Switch>
+            <Route exact path={routePaths.homePage()} component={App} />
+            <Route path={routePaths.userComponent()} component={UserComponent} />
+        </Switch>
+    </>
 );
 
 export default Routes;

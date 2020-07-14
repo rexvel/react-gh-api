@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-import getUser from '../../store/actions/setUserArr';
+import getUsers from '../../../store/actions/setUserArr';
+import TestComponent from '../../TestComponent';
 import './App.css';
-import TestComponent from '../TestComponent';
 
 const useStyles = theme => ({
     root: {
@@ -37,7 +37,7 @@ class App extends React.Component {
     };
 
     componentDidMount() {
-        getUser();
+        getUsers();
     }
 
     renderLoading = () => <p>Loading...</p>;

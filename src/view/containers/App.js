@@ -1,14 +1,14 @@
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
-import App from "../components/App";
-import getUser from '../../store/actions/setUserArr';
+import App from '../components/App/App';
+import getUsers from '../../store/actions/setUserArr';
 
 const mapStateToProps = ({ users }) => ({
-  users,
+    users,
 });
 
-
-
 // eslint-disable-next-line arrow-parens
-// getUser - thunk
-export default connect(mapStateToProps, getUser)(App);
+export default connect(
+    mapStateToProps,
+    getUsers,
+)(App);
