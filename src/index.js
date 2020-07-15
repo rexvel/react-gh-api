@@ -8,13 +8,13 @@ import store from './store/index';
 import AppRoot from './view/components/AppRoot';
 import * as serviceWorker from './serviceWorker';
 
+// eslint-disable-next-line import/prefer-default-export
 export const history = createBrowserHistory();
-
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-    <AppRoot />
+      <AppRoot />
     </Router>
   </Provider>,
 

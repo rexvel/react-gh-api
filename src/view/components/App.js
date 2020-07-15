@@ -1,76 +1,67 @@
-import React from "react";
-import { MemoryRouter as Router } from 'react-router';
-import _ from "lodash";
-import Grid from "@material-ui/core/Grid";
-import { withStyles } from "@material-ui/core/styles";
-import getUser from "../../store/actions/setUserArr";
-import "./App.css";
-import TestComponent from "../TestComponent";
+import React from 'react';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+import getUsers from '../../store/actions/setUserArr';
+import TestComponent from '../TestComponent';
+import './App.css';
 
-const useStyles = theme => ({
+const useStyles = (theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   paper: {
     height: 140,
-    width: 100
+    width: 100,
   },
   control: {
-    padding: theme.spacing(2)
-  }
+    padding: theme.spacing(2),
+  },
 });
 
 class App extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      username: "",
-      spacing : 2,
-      
-    };
-    this.myRef = React.createRef();
-  }
+  state = {
+    spacing: 2,
+  };
+
+  myRef = React.createRef();
+
+  static propTypes = {
+    users: PropTypes.shape.isRequired,
+    classes: PropTypes.objectOf({
+      root: PropTypes.objectOf({
+        flexGrow: PropTypes.number.isRequired,
+      }),
+    }).isRequired,
+  };
 
   componentDidMount() {
-    getUser();
+    getUsers();
   }
 
-  render() {
-    const { users } = this.props;
-    if (users[0] == undefined) return this.renderLoading();
-    return this.renderMain();
-  }
-
-  renderLoading() {
-    return <p>Loading...</p>;
-  }
+  renderLoading = () => <p>Loading...</p>;
 
   renderMain() {
+    const { spacing } = this.state;
     const { users, classes } = this.props;
-    let list = [];
+    const { root } = classes;
+    const list = [];
 
     if (!_.isEmpty(users)) {
       for (const user in users) {
-        let ghUser = users[user];
+        const ghUser = users[user];
+
         console.log(ghUser);
         list.push(ghUser);
       }
     }
 
-    list.map((object) => {
-      console.log({ ...object });
-    });
-
-    console.log(users);
-    console.log(list);
-
     return (
-      <div className="App" style={{padding:'70px'}}>
-        {/* <TestComponent user={list[0]} /> */}
-
-        <Grid container className={classes.root} >
+      <div className="App" style={{ padding: '70px' }}>
+        <Grid container className={root}>
           <Grid item xs={12}>
-            <Grid container justify="center" spacing={this.state.spacing}>
+            <Grid container justify="center" spacing={spacing}>
               {list.map((object) => {
                 return (
                   <Grid key={_.uniqueId(object)} item>
@@ -84,6 +75,12 @@ class App extends React.Component {
       </div>
     );
   }
+
+  render() {
+    const { users } = this.props;
+
+    return users[0] === undefined ? this.renderLoading() : this.renderMain();
+  }
 }
 
-export default withStyles(useStyles)(App)
+export default withStyles(useStyles)(App);
