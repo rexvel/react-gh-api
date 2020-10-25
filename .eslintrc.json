@@ -1,0 +1,44 @@
+// .eslintrc
+{
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["react", "prettier"],
+  "rules": {
+    
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "tabWidth": 2,
+        "trailingComma": "all",
+        "printWidth": 120
+      }
+    ],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/state-in-constructor": 0,
+    "react/static-property-placement": 0,
+    "experimentalObjectRestSpread": true,
+    "react/prefer-stateless-function": 1,
+    "react/jsx-no-bind": [0, {
+      "ignoreRefs": false,
+      "allowArrowFunctions": false,
+      "allowBind": true
+    }],
+    "react/prop-types": [1, {
+      "ignore": ["className", "children", "location", "params", "location*"]
+    }]
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 10
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true
+}
+  
+}
